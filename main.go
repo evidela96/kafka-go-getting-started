@@ -17,12 +17,10 @@ func (p *publisherTest) To(event AMQStream.ISpecificRecord, key string) error {
 	}
 	topics := []string{"PedidoAsignadoTest"}
 	config.ToProducer(event, topics)
-	AMQStream.To(event, "key123")
 	return nil
 }
 
 func main() {
-
 	event := Events.Pedido{
 		Id:                      "c2781822-5f08-4302-bb9e-8154cc12f43a",
 		NumeroDePedido:          20,
@@ -32,15 +30,17 @@ func main() {
 		CuentaCorriente:         5231235123,
 		Cuando:                  "Nose",
 	}
-	//AMQStream.To(&event, "key123")
-
-	publisher := publisherTest{}
-
-	err := publisher.To(&event, "key123")
+	config, err := AMQStream.AddKafka()
 	if err != nil {
-		log.Fatal("F")
+		log.Fatal(err)
 	}
+	topics := []string{"PedidoAsignadoTest"}
+	config.ToProducer(&event, topics)
 
+	err = AMQStream.To(&event, "key123")
+	if err != nil {
+		log.Fatal(err)
+	}
 	//publish.publishTest(event)
 
 	// suscriptor := SuscriberTest{}
