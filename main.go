@@ -4,23 +4,21 @@ import (
 	"log"
 	"os"
 
-	"github.com/architecture-it/go-platform/AMQStream"
 	TestEvents "github.com/architecture-it/integracion-schemas-event-go/Test"
-	"github.com/evidela96/kafka-go-getting-started/kafka"
-	_ "github.com/evidela96/kafka-go-getting-started/kafka"
+	kafkaConfig "github.com/evidela96/kafka-go-getting-started/KafkaConfig"
 )
 
 type ConsumerTest struct{}
 
 func main() {
-	/* kafkaDemoRetro := TestEvents.KafkaDemoRetro{
+	kafkaDemoRetro := TestEvents.KafkaDemoRetro{
 		Id:               12,
 		Title:            "evidela",
 		Attendance:       123,
 		DidYouUnderstand: true,
 		Me:               TestEvents.NewPerson(),
 		Time:             123,
-	} */
+	}
 	//articulo2 := EventoWhArticulosEvents.NewEventoWhArticuloAsnConfirmacion()
 	/* e := EventoWhArticulosEvents.EventoWhArticuloExpedicion{
 		Identificacion: EventoWhArticulosEvents.Identificacion{},
@@ -101,18 +99,12 @@ func main() {
 		Cuando:                  "3/10/2022Z00:00:0000",
 	} */
 	//articuloExpedido := EventoWhArticulosEvents.NewEventoWhArticuloExpedicion()
-
-	/* publisher := kafka.PublisherTest{}
-	err := publisher.To(&kafkaDemoRetro, "articulo2key")
-	if err != nil {
-		log.Fatal(err)
-	} */
-	config, err := AMQStream.AddKafka()
+	publisher := kafkaConfig.PublisherTest{}
+	kafkaConfig.ConfigTopicForProducer(&kafkaDemoRetro, []string{os.Getenv("KAFKA_TOPIC")})
+	err := publisher.To(&kafkaDemoRetro, "key123456")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	config.ToConsumer(&kafka.ConsumerTest{}, &TestEvents.KafkaDemoRetro{}, []string{os.Getenv("KafkaDemoTest")})
-
-	config.Build()
+	kafkaConfig.LisenToEvents()
 }
