@@ -1,0 +1,9 @@
+AMQStreams:
+  ApplicationName: Example
+  GroupId: ExampleGroup
+  BootstrapServer: "SSL://cluster-kafka-bootstrap-amq-streams-test.apps.ocptest.andreani.com.ar:443"
+  SchemaUrl: "http://apicurioregistry.apps.ocptest.andreani.com.ar/apis/ccompat/v6/andreani/"
+  Protocol: Ssl
+  SslCertificateLocation: "./kafka.pem"
+  EnableSslCertificateVerification: false
+  AutoOffsetReset: Earliest
