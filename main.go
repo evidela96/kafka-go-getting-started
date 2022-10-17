@@ -1,25 +1,26 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"os"
 
 	"github.com/architecture-it/go-platform/AMQStream"
 	TestEvents "github.com/architecture-it/integracion-schemas-event-go/Test"
+	"github.com/evidela96/kafka-go-getting-started/kafka"
+	_ "github.com/evidela96/kafka-go-getting-started/kafka"
 )
 
-type PublisherTest struct{}
-type SuscriberTest struct{}
+type ConsumerTest struct{}
 
 func main() {
-	kafkaDemoRetro := TestEvents.KafkaDemoRetro{
+	/* kafkaDemoRetro := TestEvents.KafkaDemoRetro{
 		Id:               12,
 		Title:            "evidela",
 		Attendance:       123,
 		DidYouUnderstand: true,
 		Me:               TestEvents.NewPerson(),
 		Time:             123,
-	}
+	} */
 	//articulo2 := EventoWhArticulosEvents.NewEventoWhArticuloAsnConfirmacion()
 	/* e := EventoWhArticulosEvents.EventoWhArticuloExpedicion{
 		Identificacion: EventoWhArticulosEvents.Identificacion{},
@@ -100,41 +101,18 @@ func main() {
 		Cuando:                  "3/10/2022Z00:00:0000",
 	} */
 	//articuloExpedido := EventoWhArticulosEvents.NewEventoWhArticuloExpedicion()
-	publish := &PublisherTest{}
-	err := publish.To(&kafkaDemoRetro, "articulo2key")
+
+	/* publisher := kafka.PublisherTest{}
+	err := publisher.To(&kafkaDemoRetro, "articulo2key")
 	if err != nil {
 		log.Fatal(err)
-	}
-	/* config, err := AMQStream.AddKafka()
-
-	suscriptor := SuscriberTest{}
-	//consumedEvent := Events.Pedido{}
-	articulo := EventoWhArticulosEvents.EventoWhActiculoAsnConfirmacion{}
-	var wg sync.WaitGroup
-
-	config.ToConsumer(&suscriptor, &articulo, "EventoWh-ArticulosAsnConfirmado")
-
-	wg.Add(1)
-	go config.Build()
-	wg.Wait()
-	*/
-}
-
-func (p *PublisherTest) To(event AMQStream.ISpecificRecord, key string) error {
+	} */
 	config, err := AMQStream.AddKafka()
 	if err != nil {
-		return err
-	}
-	topics := []string{"KafkaDemoTest"}
-	config.ToProducer(event, topics)
-	err = AMQStream.To(event, "key123")
-	if err != nil {
 		log.Fatal(err)
 	}
-	return nil
-}
 
-func (s *SuscriberTest) Handler(event AMQStream.ISpecificRecord, metadata AMQStream.ConsumerMetadata) {
+	config.ToConsumer(&kafka.ConsumerTest{}, &TestEvents.KafkaDemoRetro{}, []string{os.Getenv("KafkaDemoTest")})
 
-	fmt.Printf("Evento: %v\n", event)
+	config.Build()
 }
