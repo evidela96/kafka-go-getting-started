@@ -4,10 +4,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/architecture-it/go-platform/AMQStream"
-	TestEvents "github.com/architecture-it/integracion-schemas-event-go/Test"
-	"github.com/evidela96/kafka-go-getting-started/kafka"
-	_ "github.com/evidela96/kafka-go-getting-started/kafka"
+	"github.com/actgardner/gogen-avro/v10/vm/types"
+	kafkaConfig "github.com/evidela96/kafka-go-getting-started/KafkaConfig"
+	ArticuloEvent "github.com/evidela96/kafka-go-getting-started/models/ArticuloEvent"
 )
 
 type ConsumerTest struct{}
@@ -21,6 +20,51 @@ func main() {
 		Me:               TestEvents.NewPerson(),
 		Time:             123,
 	} */
+	articuloSol := ArticuloEvent.MantenimientoDeArticuloSolicitado{
+		Contrato: "350001680",
+		Almacen:  "wmwhse4",
+		Planta:   "BENAVIDEZ",
+		DetalleDeArticulo: ArticuloEvent.DetalleDeArticulo{
+			Codigo: "7200204",
+			EAN13: &ArticuloEvent.UnionNullString{
+				Null:      &types.NullVal{},
+				String:    "ean13",
+				UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+			},
+			Propietario: "NOVO CUARENTENA",
+			Descripcion: "jajajajaj ni idea",
+			CamposLibres: &ArticuloEvent.UnionNullArrayMetadato{
+				Null: &types.NullVal{},
+				ArrayMetadato: []ArticuloEvent.Metadato{
+					{
+						Meta: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "meta1",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+						Contenido: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "contenido1",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+					},
+					{
+						Meta: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "meta2",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+						Contenido: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "contenido2",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+					},
+				},
+				UnionType: ArticuloEvent.UnionNullArrayMetadatoTypeEnumArrayMetadato,
+			},
+		},
+	}
 	//articulo2 := EventoWhArticulosEvents.NewEventoWhArticuloAsnConfirmacion()
 	/* e := EventoWhArticulosEvents.EventoWhArticuloExpedicion{
 		Identificacion: EventoWhArticulosEvents.Identificacion{},
@@ -101,18 +145,12 @@ func main() {
 		Cuando:                  "3/10/2022Z00:00:0000",
 	} */
 	//articuloExpedido := EventoWhArticulosEvents.NewEventoWhArticuloExpedicion()
-
-	/* publisher := kafka.PublisherTest{}
-	err := publisher.To(&kafkaDemoRetro, "articulo2key")
-	if err != nil {
-		log.Fatal(err)
-	} */
-	config, err := AMQStream.AddKafka()
+	publisher := kafkaConfig.PublisherTest{}
+	kafkaConfig.ConfigTopicForProducer(&articuloSol, []string{os.Getenv("KAFKA_TOPIC")})
+	err := publisher.To(&articuloSol, "key123456")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	config.ToConsumer(&kafka.ConsumerTest{}, &TestEvents.KafkaDemoRetro{}, []string{os.Getenv("KafkaDemoTest")})
-
-	config.Build()
+	kafkaConfig.LisenToEvents()
 }
