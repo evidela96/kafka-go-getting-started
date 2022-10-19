@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/actgardner/gogen-avro/v10/vm/types"
 	kafkaConfig "github.com/evidela96/kafka-go-getting-started/KafkaConfig"
 	ArticuloEvent "github.com/evidela96/kafka-go-getting-started/models/ArticuloEvent"
 )
@@ -24,9 +25,44 @@ func main() {
 		Almacen:  "wmwhse4",
 		Planta:   "BENAVIDEZ",
 		DetalleDeArticulo: ArticuloEvent.DetalleDeArticulo{
-			Codigo:      "7200204",
+			Codigo: "7200204",
+			EAN13: &ArticuloEvent.UnionNullString{
+				Null:      &types.NullVal{},
+				String:    "ean13",
+				UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+			},
 			Propietario: "NOVO CUARENTENA",
 			Descripcion: "jajajajaj ni idea",
+			CamposLibres: &ArticuloEvent.UnionNullArrayMetadato{
+				Null: &types.NullVal{},
+				ArrayMetadato: []ArticuloEvent.Metadato{
+					{
+						Meta: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "meta1",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+						Contenido: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "contenido1",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+					},
+					{
+						Meta: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "meta2",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+						Contenido: &ArticuloEvent.UnionNullString{
+							Null:      &types.NullVal{},
+							String:    "contenido2",
+							UnionType: ArticuloEvent.UnionNullStringTypeEnumString,
+						},
+					},
+				},
+				UnionType: ArticuloEvent.UnionNullArrayMetadatoTypeEnumArrayMetadato,
+			},
 		},
 	}
 	//articulo2 := EventoWhArticulosEvents.NewEventoWhArticuloAsnConfirmacion()
