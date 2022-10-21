@@ -3,7 +3,7 @@
  * SOURCE:
  *     Metadato.avsc
  */
-package avro
+package V2
 
 import (
 	"encoding/json"

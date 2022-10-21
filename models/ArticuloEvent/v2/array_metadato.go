@@ -3,7 +3,7 @@
  * SOURCE:
  *     DetalleDeArticulo.avsc
  */
-package avro
+package V2
 
 import (
 	"io"
