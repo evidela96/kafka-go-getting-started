@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/architecture-it/go-platform/AMQStream"
-	ArticuloEvent "github.com/evidela96/kafka-go-getting-started/models/ArticuloEvent"
+	v2 "github.com/evidela96/kafka-go-getting-started/models/ArticuloEvent/v2"
 )
 
 type ConsumerTest struct{}
@@ -18,7 +18,7 @@ func init() {
 		log.Fatal(err)
 	}
 	subscriber := ConsumerTest{}
-	config.ToConsumer(&subscriber, &ArticuloEvent.MantenimientoDeArticuloSolicitado{}, []string{os.Getenv("KAFKA_TOPIC")})
+	config.ToConsumer(&subscriber, &v2.MantenimientoDeArticuloSolicitado{}, []string{os.Getenv("KAFKA_TOPIC")})
 }
 
 func (c *ConsumerTest) Handler(event interface{}, metadata AMQStream.ConsumerMetadata) error {

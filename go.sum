@@ -8,8 +8,6 @@ github.com/actgardner/gogen-avro/v9 v9.1.0/go.mod h1:nyTj6wPqDJoxM3qdnjcLv+EnMDS
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/architecture-it/go-platform v0.9.0 h1:oD0OZoMhlIxlMr1WY2As8U4q92mwHMHrF82he6Mjmgk=
 github.com/architecture-it/go-platform v0.9.0/go.mod h1:mmsNeX/bI8MoV1+vmLWIjMO5lQMuCDEOuxeLsx97Mm0=
-github.com/architecture-it/integracion-schemas-event-go v1.1.55 h1:CCpEJQQxcS1JHgg8JK/KHVZVOeLnAIB1/U+qgWyZ2lA=
-github.com/architecture-it/integracion-schemas-event-go v1.1.55/go.mod h1:ArRMKwDJfKJqHu8vPKsbvfyYXItcz3DROgDJTiMmr9g=
 github.com/benbjohnson/clock v1.1.0 h1:Q92kusRqC1XV2MjkWETPvjJVqKetz1OzxZB7mHJLju8=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash/v2 v2.1.1/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=

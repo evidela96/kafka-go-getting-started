@@ -4,9 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/actgardner/gogen-avro/v10/vm/types"
 	kafkaConfig "github.com/evidela96/kafka-go-getting-started/KafkaConfig"
-	ArticuloEvent "github.com/evidela96/kafka-go-getting-started/models/ArticuloEvent"
+	v2 "github.com/evidela96/kafka-go-getting-started/models/ArticuloEvent/v2"
 )
 
 type ConsumerTest struct{}
@@ -20,7 +19,7 @@ func main() {
 		Me:               TestEvents.NewPerson(),
 		Time:             123,
 	} */
-	articuloSol := ArticuloEvent.MantenimientoDeArticuloSolicitado{
+	/* articuloSol := ArticuloEvent.MantenimientoDeArticuloSolicitado{
 		Contrato: "350001680",
 		Almacen:  "wmwhse4",
 		Planta:   "BENAVIDEZ",
@@ -64,90 +63,48 @@ func main() {
 				UnionType: ArticuloEvent.UnionNullArrayMetadatoTypeEnumArrayMetadato,
 			},
 		},
-	}
-	//articulo2 := EventoWhArticulosEvents.NewEventoWhArticuloAsnConfirmacion()
-	/* e := EventoWhArticulosEvents.EventoWhArticuloExpedicion{
-		Identificacion: EventoWhArticulosEvents.Identificacion{},
-		Cabecera:       EventoWhArticulosEvents.Cabecera{},
-		Detalle:        []EventoWhArticulosEvents.Detalle{},
 	} */
-	/* identificacion := EventoWhArticulosEvents.Identificacion{
-		Id:                  "123",
-		Evento:              "evidela-Evento",
-		Proceso:             "Alta Articulo",
-		FechaHoraGeneracion: 123,
-		SistemaOrigen:       "PC",
-		Almacen:             "wmwhse1",
-		Propietario:         "evidela",
-		Instancia:           "instancia",
-	}  */
-	/* articulo := EventoWhArticulosEvents.EventoWhArticuloExpedicion{
-		Identificacion: EventoWhArticulosEvents.Identificacion{
-			Id:                  "123",
-			Evento:              "evidela-Evento",
-			Proceso:             "Alta Articulo",
-			FechaHoraGeneracion: 123,
-			SistemaOrigen:       "PC",
-			Almacen:             "wmwhse1",
-			Propietario:         "evidela",
-			Instancia:           "instancia",
-		},
-		Cabecera: EventoWhArticulosEvents.Cabecera{
-			SKU:                 "sku123",
-			Descripcion:         "eeeee messi",
-			Propietario:         "evidela",
-			TipoOrigen:          "original",
-			CodigoOrigenWH:      "or1234",
-			CodigoOrigenExterno: "ore1234",
-		},
-		Detalle: []EventoWhArticulosEvents.Detalle{
-			{
-				PaqueteLote:          "PaqueteLote",
-				LoteCajitaFabricante: "LoteCajitaFabricante",
-				LoteSecundario:       "LoteSecundario",
-				FechaFabricacion: &EventoWhArticulosEvents.UnionNullLong{
-					Null:      &types.NullVal{},
-					Long:      12,
-					UnionType: 12,
+	articuloV2 := v2.MantenimientoDeArticuloSolicitado{
+		Contrato: "350001680",
+		Almacen:  "wmwhse4",
+		Planta:   "BENAVIDEZ",
+		DetalleDeArticulo: v2.DetalleDeArticulo{
+			Codigo:                        "7200204",
+			Propietario:                   "NOVO CUARENTENA",
+			Descripcion:                   "jajajajaj ni idea",
+			EAN13:                         "1432143241234",
+			EsNumeroDeSerieDeEntradaUnico: false,
+			RequiereCapturaDatosEntrada:   true,
+			EsNumeroDeSerieSalidaUnico:    true,
+			VidaUtilEnDias:                1232141,
+			ConsumoEnDias:                 7589403275,
+			OtrosDatos: []v2.Metadato{
+				{
+					Meta:      "meta1",
+					Contenido: "Contenido1",
 				},
-				FechaVencimiento: &EventoWhArticulosEvents.UnionNullLong{
-					Null:      &types.NullVal{},
-					Long:      15,
-					UnionType: 15,
+				{
+					Meta:      "meta1",
+					Contenido: "Contenido1",
 				},
-				ProductoTrazable: "ProductoTrazable",
-				AlmacenConsumo:   "AlmacenConsumo",
-				EstadoLote:       "EstadoLote",
-				VidaUtilLote:     "VidaUtilLote",
-				EntregaAntesDe: &EventoWhArticulosEvents.UnionNullLong{
-					Null:      &types.NullVal{},
-					Long:      15,
-					UnionType: 15,
+				{
+					Meta:      "meta1",
+					Contenido: "Contenido1",
 				},
-				ConsumoAntesDe: &EventoWhArticulosEvents.UnionNullLong{
-					Null:      &types.NullVal{},
-					Long:      15,
-					UnionType: 15,
+				{
+					Meta:      "meta1",
+					Contenido: "Contenido1",
 				},
-				StockDisponible: 100,
-				StockEnTransito: 50,
+				{
+					Meta:      "meta1",
+					Contenido: "Contenido1",
+				},
 			},
 		},
-	} */
-
-	/* event := Events.Pedido{
-		Id:                      "c2781822-5f08-4302-bb9e-8154cc12f43a",
-		NumeroDePedido:          20,
-		EstadoDelPedido:         "Pedido123",
-		CicloDelPedido:          "c2781822-5f08-4302-bb9e-8154cc12f43a",
-		CodigoDeContratoInterno: 123123123,
-		CuentaCorriente:         5231235123,
-		Cuando:                  "3/10/2022Z00:00:0000",
-	} */
-	//articuloExpedido := EventoWhArticulosEvents.NewEventoWhArticuloExpedicion()
+	}
 	publisher := kafkaConfig.PublisherTest{}
-	kafkaConfig.ConfigTopicForProducer(&articuloSol, []string{os.Getenv("KAFKA_TOPIC")})
-	err := publisher.To(&articuloSol, "key123456")
+	kafkaConfig.ConfigTopicForProducer(&articuloV2, []string{os.Getenv("KAFKA_TOPIC")})
+	err := publisher.To(&articuloV2, "key123456")
 	if err != nil {
 		log.Fatal(err)
 	}
