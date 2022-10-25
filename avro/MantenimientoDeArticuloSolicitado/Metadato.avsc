@@ -1,0 +1,12 @@
+{
+  "type" : "record",
+  "name" : "Metadato",
+  "namespace" : "Andreani.EventoWhArticulos.Events.Record",
+  "fields" : [ {
+    "name" : "Meta",
+    "type" : "string"
+  }, {
+    "name" : "Contenido",
+    "type" : "string"
+  } ]
+}

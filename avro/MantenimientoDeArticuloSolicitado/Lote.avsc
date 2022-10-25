@@ -1,0 +1,34 @@
+{
+  "type" : "record",
+  "name" : "Lote",
+  "namespace" : "Andreani.EventoWhArticulos.Events.Record",
+  "fields" : [ {
+    "name" : "Codigo",
+    "type" : "string"
+  }, {
+    "name" : "LoteDeFabricante",
+    "type" : "string"
+  }, {
+    "name" : "LoteSecundario",
+    "type" : "string"
+  }, {
+    "name" : "FechaDeVencimiento",
+    "type" : "string"
+  }, {
+    "name" : "OtrosDatos",
+    "type" : {
+      "type" : "array",
+      "items" : {
+        "type" : "record",
+        "name" : "Metadato",
+        "fields" : [ {
+          "name" : "Meta",
+          "type" : "string"
+        }, {
+          "name" : "Contenido",
+          "type" : "string"
+        } ]
+      }
+    }
+  } ]
+}

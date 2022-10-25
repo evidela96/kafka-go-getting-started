@@ -1,0 +1,143 @@
+{
+  "type" : "record",
+  "name" : "DetalleDeArticulo",
+  "namespace" : "Andreani.EventoWhArticulos.Events.Record",
+  "fields" : [ {
+    "name" : "Codigo",
+    "type" : "string"
+  }, {
+    "name" : "EAN13",
+    "type" : "string"
+  }, {
+    "name" : "Propietario",
+    "type" : "string"
+  }, {
+    "name" : "Lote",
+    "type" : {
+      "type" : "record",
+      "name" : "Lote",
+      "fields" : [ {
+        "name" : "Codigo",
+        "type" : "string"
+      }, {
+        "name" : "LoteDeFabricante",
+        "type" : "string"
+      }, {
+        "name" : "LoteSecundario",
+        "type" : "string"
+      }, {
+        "name" : "FechaDeVencimiento",
+        "type" : "string"
+      }, {
+        "name" : "OtrosDatos",
+        "type" : {
+          "type" : "array",
+          "items" : {
+            "type" : "record",
+            "name" : "Metadato",
+            "fields" : [ {
+              "name" : "Meta",
+              "type" : "string"
+            }, {
+              "name" : "Contenido",
+              "type" : "string"
+            } ]
+          }
+        }
+      } ]
+    }
+  }, {
+    "name" : "OtrosDatos",
+    "type" : {
+      "type" : "array",
+      "items" : "Metadato"
+    }
+  }, {
+    "name" : "Descripcion",
+    "type" : "string"
+  }, {
+    "name" : "ClaseDeExpedicion",
+    "type" : "string"
+  }, {
+    "name" : "ClaseDeArticulo",
+    "type" : "string"
+  }, {
+    "name" : "PaisDeOrigen",
+    "type" : "string"
+  }, {
+    "name" : "EsNumeroDeSerieDeEntradaUnico",
+    "type" : "boolean"
+  }, {
+    "name" : "RequiereCapturaDatosEntrada",
+    "type" : "boolean"
+  }, {
+    "name" : "EsNumeroDeSerieSalidaUnico",
+    "type" : "boolean"
+  }, {
+    "name" : "RequiereCapturaDatosSalida",
+    "type" : "boolean"
+  }, {
+    "name" : "RequierecapturaTotalNumSeries",
+    "type" : "boolean"
+  }, {
+    "name" : "Caracteristicas",
+    "type" : {
+      "type" : "array",
+      "items" : "Metadato"
+    }
+  }, {
+    "name" : "Notas",
+    "type" : "string"
+  }, {
+    "name" : "InstruccionesDePreparacion",
+    "type" : "string"
+  }, {
+    "name" : "VidaUtilEnDias",
+    "type" : "long"
+  }, {
+    "name" : "CodigoDeVidaUtil",
+    "type" : "string"
+  }, {
+    "name" : "IndicadorDeVidaUtil",
+    "type" : "string"
+  }, {
+    "name" : "ConsumoEnDias",
+    "type" : "long"
+  }, {
+    "name" : "VencimientoEnDias",
+    "type" : "long"
+  }, {
+    "name" : "VidaUtilEntradaEnDias",
+    "type" : "long"
+  }, {
+    "name" : "AcondicionamientoSecundario",
+    "type" : "string"
+  }, {
+    "name" : "ZonaRepo",
+    "type" : "string"
+  }, {
+    "name" : "Grupos",
+    "type" : {
+      "type" : "array",
+      "items" : "Metadato"
+    }
+  }, {
+    "name" : "Volumen",
+    "type" : "double"
+  }, {
+    "name" : "PesoBruto",
+    "type" : "double"
+  }, {
+    "name" : "PesoTara",
+    "type" : "double"
+  }, {
+    "name" : "PesoNeto",
+    "type" : "double"
+  }, {
+    "name" : "CamposLibres",
+    "type" : {
+      "type" : "array",
+      "items" : "Metadato"
+    }
+  } ]
+}

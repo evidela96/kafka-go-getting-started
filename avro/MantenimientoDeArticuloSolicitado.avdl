@@ -1,0 +1,54 @@
+@namespace("Andreani.EventoWhArticulos.Events.Record")
+protocol MantenimientoDeArticuloSolicitadoProtocol {
+    record MantenimientoDeArticuloSolicitado {
+        string Contrato;
+        string Almacen;
+        string AlmacenSAP;
+        string Planta;
+        DetalleDeArticulo DetalleDeArticulo;
+    }
+    record DetalleDeArticulo {
+        string Codigo;
+        string EAN13;
+        string Propietario;
+        Lote  Lote;
+        array<Metadato> OtrosDatos;
+        string Descripcion;
+        string ClaseDeExpedicion;
+        string ClaseDeArticulo;
+        string PaisDeOrigen;
+        boolean EsNumeroDeSerieDeEntradaUnico;
+        boolean RequiereCapturaDatosEntrada;
+        boolean EsNumeroDeSerieSalidaUnico;
+        boolean RequiereCapturaDatosSalida;
+        boolean RequierecapturaTotalNumSeries;
+        array<Metadato> Caracteristicas;
+        string Notas;
+        string InstruccionesDePreparacion;
+        long VidaUtilEnDias;
+        string CodigoDeVidaUtil;
+        string IndicadorDeVidaUtil;
+        long ConsumoEnDias;
+        long VencimientoEnDias;
+        long VidaUtilEntradaEnDias;
+        string AcondicionamientoSecundario;
+        string ZonaRepo;
+        array<Metadato> Grupos;
+        double Volumen;
+        double PesoBruto;
+        double PesoTara;
+        double PesoNeto;
+        array<Metadato> CamposLibres;
+    }
+    record Lote {
+        string Codigo;
+        string LoteDeFabricante;
+        string LoteSecundario;
+        string FechaDeVencimiento;
+        array<Metadato> OtrosDatos;
+    }
+    record Metadato {
+        string Meta;
+        string Contenido;
+    }
+}
