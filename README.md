@@ -1,6 +1,6 @@
-## kafka-go-getting-started
+# Kafka-go-getting-started
 
-# Enviroment Variables
+## Enviroment Variables
 ```sh
 export KAFKA_TOPIC="CapacitacionKafka-EVidela"
 ```
